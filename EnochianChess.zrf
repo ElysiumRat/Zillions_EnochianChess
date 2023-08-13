@@ -1,0 +1,214 @@
+(game
+	; Opening fluff
+	(title "Enochian Chess")
+	(description "A four-player chess variant in which players, in teams diagonally opposite one another, attempt to capture both kings of their opponents.")
+	(history "Enochian chess' fascinating history begins in the late 1800s, when occultists Wynn Westcott and MacGregor Mathers updated the Enochian system of magic for the Hermetic Order of the Golden Dawn, and incorporated a four-handed chess game originally dubbed Rosicrucian chess---later dubbed Enochian chess, due to its derivation from the Enochian Tablets of Dr. John Dee.\\From 'Enochian Chess of the Golden Dawn' by Chris Zalewski")
+
+	(players Air Earth Fire Water)
+
+	; Movement macros
+	(define move-kp ($1 (verify not-friend?) add))
+	(define move-knq ($1 $2 (verify not-friend?) add))
+	(define move-br ($1 (while empty? add $1) (verify not-friend?) add))
+
+(define Board-Definitions
+	(image "images\EnochianChess\Simple.bmp")
+	(grid
+		(start-rectangle 5 5 53 53)
+			(dimensions
+			("a/b/c/d/e/f/g/h" (49 0)) ; files
+			("8/7/6/5/4/3/2/1" (0 49)) ; columns
+		)
+	)
+	(zone
+		(name promotion-zone)
+		(players Air)
+		(positions a1 b1 c1 d1 e1 f1 g1 h1)
+	)
+	(zone
+		(name promotion-zone)
+		(players Earth)
+		(positions h1 h2 h3 h4 h5 h6 h7 h8)
+	)
+	(zone
+		(name promotion-zone)
+		(players Fire)
+		(positions a8 b8 c8 d8 e8 f8 g8 h8)
+	)
+	(zone
+		(name promotion-zone)
+		(players Water)
+		(positions a1 a2 a3 a4 a5 a6 a7 a8)
+	)
+) ; Closing bracket for board definition
+
+(define promotion
+	(if (in-zone? promotion-zone)
+		(if (is captured? Air Pawn) (add $1))
+		(if (is captured? Earth Pawn) (add $1))
+		(if (is captured? Fire Pawn) (add $1))
+		(if (is captured? Water Pawn) (add $1))
+	)
+) ; Closing bracket for promotion
+
+(piece
+	(name Bishop)
+	(help "Bishop: moves any number of squares in a diagonal direction.")
+	(image	Air "images\Enochian\ABishop.bmp"
+		Earth "images\Enochian\EBishop.bmp"
+		Fire "images\Enochian\FBishop.bmp"
+		Water "images\Enochian\WBishop.bmp")
+	(moves
+		(move-br nw)
+		(move-br ne)
+		(move-br sw)
+		(move-br se)
+	)
+) ; closing bracket for bishop
+
+(piece
+	(name King)
+	(help "King: moves one square in any direction.")
+	(image	Air "images\Enochian\AKing.bmp"
+		Earth "images\Enochian\EKing.bmp"
+		Fire "images\Enochian\FKing.bmp"
+		Water "images\Enochian\WKing.bmp")
+	(moves
+		(move-kp n)
+		(move-kp s)
+		(move-kp e)
+		(move-kp w)
+		(move-kp ne)
+		(move-kp nw)
+		(move-kp se)
+		(move-kp sw)
+	) 
+) ; closing bracket for king
+
+(piece
+	(name Knight)
+	(help "Knight: moves two squares in one direction, then one in a parallel direction, leaping over any pieces in its path.")
+	(image	Air "images\Enochian\AKnight.bmp"
+		Earth "images\Enochian\EKnight.bmp"
+		Fire "images\Enochian\FKnight.bmp"
+		Water "images\Enochian\WKnight.bmp")
+	(moves
+		(move-knq n ne)
+		(move-knq n nw)
+		(move-knq s se)
+		(move-knq s sw)
+		(move-knq e ne)
+		(move-knq e se)
+		(move-knq w nw)
+		(move-knq w sw)
+	)
+) ; closing bracket for knight
+
+(piece
+	(name Queen)
+	(help "Queen: moves two squares in any direction, leaping over any pieces in its path.")
+	(image	Air "images\Enochian\AQueen.bmp"
+		Earth "images\Enochian\EQueen.bmp"
+		Fire "images\Enochian\FQueen.bmp"
+		Water "images\Enochian\WQueen.bmp")
+	(moves
+		(move-knq n n)
+		(move-knq s s)
+		(move-knq e e)
+		(move-knq w w)
+		(move-knq nw nw)
+		(move-knq ne ne)
+		(move-knq sw sw)
+		(move-knq se se)
+	)
+) ; closing bracket for queen
+
+(piece
+	(name Rook)
+	(help "Rook: moves any number of squares in an orthogonal direction.")
+	(image	Air "images\Enochian\ARook.bmp"
+		Earth "images\Enochian\ERook.bmp"
+		Fire "images\Enochian\FRook.bmp"
+		Water "images\Enochian\WRook.bmp")
+	(moves
+		(move-br n)
+		(move-br s)
+		(move-br e)
+		(move-br w)
+	)
+) ; closing bracket for rook
+
+(define bishop-pawn
+	(piece
+		(name $1 Bishop Pawn)
+		(help "Bishop pawn: moves one square forward, promotes to bishop when reaching the last rank, if the player's bishop has been taken.")
+		(image	Air "images\Enochian\APawnBishop.bmp"
+			Earth "images\Enochian\EPawnBishop.bmp"
+			Fire "images\Enochian\FPawnBishop.bmp"
+			Water "images\Enochian\WPawnBishop.bmp")
+		(moves (move-kp $2))
+		(promotion Bishop)
+	)
+) ; closing bracket for bishop pawn
+
+(define knight-pawn
+	(piece
+		(name $1 Knight Pawn)
+		(help "Knight pawn: moves one square forward, promotes to knight when reaching the last rank, if the player's knight has been taken.")
+		(image	Air "images\Enochian\APawnKnight.bmp"
+			Earth "images\Enochian\EPawnKnight.bmp"
+			Fire "images\Enochian\FPawnKnight.bmp"
+			Water "images\Enochian\WPawnKnight.bmp")
+		(moves (move-kp $2))
+		(promotion Knight)
+	)
+) ; closing bracket for knight pawn
+
+(define rook-pawn
+	(piece
+		(name $1 Rook Pawn)
+		(help "Rook pawn: moves one square forward, promotes to rook when reaching the last rank, if the player's rook has been taken.")
+		(image	Air "images\Enochian\APawnRook.bmp"
+			Earth "images\Enochian\EPawnRook.bmp"
+			Fire "images\Enochian\FPawnRook.bmp"
+			Water "images\Enochian\WPawnRook.bmp")
+		(moves (move-kp $2))
+		(promotion Rook)
+	)
+) ; closing bracket for rook pawn
+
+(define queen-pawn
+	(piece
+		(name $1 Queen Pawn)
+		(help "Queen pawn: moves one square forward, promotes to queen when reaching the last rank, if the player's queen has been taken.")
+		(image	Air "images\Enochian\APawnQueen.bmp"
+			Earth "images\Enochian\EPawnQueen.bmp"
+			Fire "images\Enochian\FPawnQueen.bmp"
+			Water "images\Enochian\WPawnQueen.bmp")
+		(moves (move-kp $2))
+		(promotion Queen)
+	)
+) ; closing bracket for queen pawn
+
+; Pawn movement rules
+(bishop-pawn Air s)
+(knight-pawn Air s)
+(queen-pawn Air s)
+(rook-pawn Air s)
+
+(bishop-pawn Earth e)
+(knight-pawn Earth e)
+(queen-pawn Earth e)
+(rook-pawn Earth e)
+
+(bishop-pawn Fire n)
+(knight-pawn Fire n)
+(queen-pawn Fire n)
+(rook-pawn Fire n)
+
+(bishop-pawn Water w)
+(knight-pawn Water w)
+(queen-pawn Water w)
+(rook-pawn Water w)
+
+) ; Closing bracket for game
