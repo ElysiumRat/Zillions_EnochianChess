@@ -1,7 +1,7 @@
 # Enochian Chess
 A ruleset for Enochian Chess for use in Zillions of Games, adapted from the ruleset present in _Enochian Chess of the Golden Dawn: A Four-Handed Chess Game_ by Chris Zalewski.
 
-# Notes on the Graphics
+## Notes on the Graphics
 Per Regardie (as cited in Zalewski, 1994, p. 21), the boards are done with just the pyramid colour scheme, and none of the other symbology, along with "a white border [...] to contain the forces therein". This choice was primarily for the sake of simplicity of visual design. White spacing was also left between the various markings in order to enhance redability of the board.
 
 The simple board is coloured as per the instructions by Zalewski (1994, pp. 30-31).
