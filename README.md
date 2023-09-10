@@ -13,5 +13,5 @@ Thanks to Zillions Development for their Chess rule set, which gave guidance on 
 
 Piece graphics adapted from originals by Brian Provan, available at https://opengameart.org/content/colorful-chess-pieces
 
-## Reference list:
+## References
 Zalewski, C. (1994). _Enochian chess of the Golden Dawn: A four-handed chess game_. Llewellyn Publications.
