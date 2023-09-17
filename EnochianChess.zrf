@@ -54,11 +54,23 @@
 ) ; Closing bracket for board definition
 
 (define promotion
-	(if (in-zone? promotion-zone)
-		(if (is captured? Air Pawn) (add $1))
-		(if (is captured? Earth Pawn) (add $1))
-		(if (is captured? Fire Pawn) (add $1))
-		(if (is captured? Water Pawn) (add $1))
+	(if (in-zone? promotion-zone) ; these are wrong - need to fix
+		(if (is captured? Air bishop-pawn) (add $1))
+		(if (is captured? Air knight-pawn) (add $1))
+		(if (is captured? Air rook-pawn) (add $1))
+		(if (is captured? Air queen-pawn) (add $1))
+		(if (is captured? Earth bishop-pawn) (add $1))
+		(if (is captured? Earth knight-pawn) (add $1))
+		(if (is captured? Earth rook-pawn) (add $1))
+		(if (is captured? Earth queen-pawn) (add $1))
+		(if (is captured? Fire bishop-pawn) (add $1))
+		(if (is captured? Fire knight-pawn) (add $1))
+		(if (is captured? Fire rook-pawn) (add $1))
+		(if (is captured? Fire queen-pawn) (add $1))
+		(if (is captured? Water bishop-pawn) (add $1))
+		(if (is captured? Water knight-pawn) (add $1))
+		(if (is captured? Water rook-pawn) (add $1))
+		(if (is captured? Water queen-pawn) (add $1))
 	)
 ) ; Closing bracket for promotion
 
