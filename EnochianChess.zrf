@@ -5,11 +5,22 @@
 	(history "Enochian chess' fascinating history begins in the late 1800s, when occultists Wynn Westcott and MacGregor Mathers updated the Enochian system of magic for the Hermetic Order of the Golden Dawn, and incorporated a four-handed chess game originally dubbed Rosicrucian chess---later dubbed Enochian chess, due to its derivation from the Enochian Tablets of Dr. John Dee.\\From 'Enochian Chess of the Golden Dawn' by Chris Zalewski")
 
 	(players Air Earth Fire Water)
+	(option "prevent flipping" true)
 
 	; Movement macros
 	(define move-kp ($1 (verify not-friend?) add))
 	(define move-knq ($1 $2 (verify not-friend?) add))
 	(define move-br ($1 (while empty? add $1) (verify not-friend?) add))
+
+	; Turn order macros
+	(define air-deo ())
+	(define air-wid ())
+	(define earth-deo ())
+	(define earth-wid ())
+	(define fire-deo ())
+	(define fire-wid ())
+	(define water-deo ())
+	(define water-wid ())
 
 (define Board-Definitions
 	(image "images\EnochianChess\Simple.bmp")
@@ -141,7 +152,7 @@
 (define bishop-pawn
 	(piece
 		(name $1 Bishop Pawn)
-		(help "Bishop pawn: moves one square forward, promotes to bishop when reaching the last rank, if the player's bishop has been taken.")
+		(help "Bishop pawn: moves one square forward, promotes to bishop when reaching the last rank, if at least one of the player's pawns has been taken.")
 		(image	Air "images\Enochian\APawnBishop.bmp"
 			Earth "images\Enochian\EPawnBishop.bmp"
 			Fire "images\Enochian\FPawnBishop.bmp"
@@ -154,7 +165,7 @@
 (define knight-pawn
 	(piece
 		(name $1 Knight Pawn)
-		(help "Knight pawn: moves one square forward, promotes to knight when reaching the last rank, if the player's knight has been taken.")
+		(help "Knight pawn: moves one square forward, promotes to knight when reaching the last rank, if at least one of the player's pawns has been taken.")
 		(image	Air "images\Enochian\APawnKnight.bmp"
 			Earth "images\Enochian\EPawnKnight.bmp"
 			Fire "images\Enochian\FPawnKnight.bmp"
@@ -167,7 +178,7 @@
 (define rook-pawn
 	(piece
 		(name $1 Rook Pawn)
-		(help "Rook pawn: moves one square forward, promotes to rook when reaching the last rank, if the player's rook has been taken.")
+		(help "Rook pawn: moves one square forward, promotes to rook when reaching the last rank, if at least one of the player's pawns has been taken.")
 		(image	Air "images\Enochian\APawnRook.bmp"
 			Earth "images\Enochian\EPawnRook.bmp"
 			Fire "images\Enochian\FPawnRook.bmp"
@@ -180,7 +191,7 @@
 (define queen-pawn
 	(piece
 		(name $1 Queen Pawn)
-		(help "Queen pawn: moves one square forward, promotes to queen when reaching the last rank, if the player's queen has been taken.")
+		(help "Queen pawn: moves one square forward, promotes to queen when reaching the last rank, if at least one of the player's pawns has been taken.")
 		(image	Air "images\Enochian\APawnQueen.bmp"
 			Earth "images\Enochian\EPawnQueen.bmp"
 			Fire "images\Enochian\FPawnQueen.bmp"
@@ -210,5 +221,353 @@
 (knight-pawn Water w)
 (queen-pawn Water w)
 (rook-pawn Water w)
+
+(variant
+	(title "Air of Earth (Deosil)")
+	(define Board-Definitions
+		(image "images\EnochianChess\Earth.bmp")
+	) ; Closing bracket for board definition
+	(turn-order air-deo)
+	(board-setup
+		(Air
+			(Air Bishop Pawn a7)
+			(Air Knight Pawn c7)
+			(Air Rook Pawn b7)
+			(Air Queen Pawn d7)
+			(Bishop a8)
+			(Knight c8)
+			(Rook b8)
+			(Queen d8)
+;			(King a8)
+		)
+		(Earth
+			(Earth Bishop Pawn b1)
+			(Earth Knight Pawn b3)
+			(Earth Rook Pawn b2)
+			(Earth Queen Pawn b4)
+			(Bishop a1)
+			(Knight a3)
+			(Rook a2)
+			(Queen a4)
+;			(King a1)
+		)
+		(Fire
+			(Fire Bishop Pawn h2)
+			(Fire Knight Pawn f2)
+			(Fire Rook Pawn g2)
+			(Fire Queen Pawn e2)
+			(Bishop h1)
+			(Knight f1)
+			(Rook g1)
+			(Queen e1)
+;			(King h1)
+		)
+		(Water
+			(Water Bishop Pawn g8)
+			(Water Knight Pawn g6)
+			(Water Rook Pawn g7)
+			(Water Queen Pawn g5)
+			(Bishop h8)
+			(Knight h6)
+			(Rook h7)
+			(Queen h5)
+;			(King h8)
+		)
+	) ; close of board-setup
+	(variant
+		(title "Air of Earth (Widdershins)")
+		(turn order air-wid)
+	) ; close of widdershins
+) ; closing bracket for Air of Earth
+
+(variant
+	(title "Air of Fire (Deosil)")
+	(define Board-Definitions
+		(image "images\EnochianChess\Fire.bmp")
+	) ; Closing bracket for board definition
+	(turn-order air-deo)
+	(board-setup
+		(Air
+			(Air Bishop Pawn a7)
+			(Air Knight Pawn c7)
+			(Air Rook Pawn b7)
+			(Air Queen Pawn d7)
+			(Bishop a8)
+			(Knight c8)
+			(Rook b8)
+			(Queen d8)
+;			(King a8)
+		)
+		(Earth
+			(Earth Bishop Pawn b1)
+			(Earth Knight Pawn b3)
+			(Earth Rook Pawn b2)
+			(Earth Queen Pawn b4)
+			(Bishop a1)
+			(Knight a3)
+			(Rook a2)
+			(Queen a4)
+;			(King a1)
+		)
+		(Fire
+			(Fire Bishop Pawn h2)
+			(Fire Knight Pawn f2)
+			(Fire Rook Pawn g2)
+			(Fire Queen Pawn e2)
+			(Bishop h1)
+			(Knight f1)
+			(Rook g1)
+			(Queen e1)
+;			(King h1)
+		)
+		(Water
+			(Water Bishop Pawn g8)
+			(Water Knight Pawn g6)
+			(Water Rook Pawn g7)
+			(Water Queen Pawn g5)
+			(Bishop h8)
+			(Knight h6)
+			(Rook h7)
+			(Queen h5)
+;			(King h8)
+		)
+	) ; close of board-setup
+	(variant
+		(title "Air of Fire (Widdershins)")
+		(turn-order air-deo)
+	) ; close of widdershins
+) ; closing bracket for variant
+
+(variant
+	(title "Earth of Earth (Deosil)")
+	(define Board-Definitions
+		(image "images\EnochianChess\Earth.bmp")
+	) ; Closing bracket for board definition
+	(turn-order earth-deo)
+	(board-setup
+		(Air
+			(Air Bishop Pawn b7)
+			(Air Knight Pawn d7)
+			(Air Rook Pawn a7)
+			(Air Queen Pawn c7)
+			(Bishop b8)
+			(Knight d8)
+			(Rook a8)
+			(Queen c8)
+;			(King h1)
+		)
+		(Earth
+			(Earth Bishop Pawn b2)
+			(Earth Knight Pawn b4)
+			(Earth Rook Pawn b1)
+			(Earth Queen Pawn b3)
+			(Bishop a2)
+			(Knight a4)
+			(Rook a1)
+			(Queen a3)
+;			(King a1)
+		)
+		(Fire
+			(Fire Bishop Pawn g2)
+			(Fire Knight Pawn e2)
+			(Fire Rook Pawn h2)
+			(Fire Queen Pawn f2)
+			(Bishop g1)
+			(Knight e1)
+			(Rook h1)
+			(Queen f1)
+;			(King h1)
+		)
+		(Water
+			(Water Bishop Pawn g7)
+			(Water Knight Pawn g5)
+			(Water Rook Pawn g8)
+			(Water Queen Pawn g6)
+			(Bishop h7)
+			(Knight h5)
+			(Rook h8)
+			(Queen h6)
+;			(King h8)
+		)
+	) ; close of board-setup
+	(variant
+		(title "Earth of Earth (Widdershins)")
+		(turn order earth-wid)
+	) ; close of widdershins
+) ; close of variant
+
+(variant
+	(title "Earth of Fire (Deosil)")
+	(define Board-Definitions
+		(image "images\EnochianChess\Fire.bmp")
+	) ; Closing bracket for board definition
+	(turn-order earth-deo)
+	(board-setup
+		(Air
+			(Air Bishop Pawn b7)
+			(Air Knight Pawn d7)
+			(Air Rook Pawn a7)
+			(Air Queen Pawn c7)
+			(Bishop b8)
+			(Knight d8)
+			(Rook a8)
+			(Queen c8)
+;			(King h1)
+		)
+		(Earth
+			(Earth Bishop Pawn b2)
+			(Earth Knight Pawn b4)
+			(Earth Rook Pawn b1)
+			(Earth Queen Pawn b3)
+			(Bishop a2)
+			(Knight a4)
+			(Rook a1)
+			(Queen a3)
+;			(King a1)
+		)
+		(Fire
+			(Fire Bishop Pawn g2)
+			(Fire Knight Pawn e2)
+			(Fire Rook Pawn h2)
+			(Fire Queen Pawn f2)
+			(Bishop g1)
+			(Knight e1)
+			(Rook h1)
+			(Queen f1)
+;			(King h1)
+		)
+		(Water
+			(Water Bishop Pawn g7)
+			(Water Knight Pawn g5)
+			(Water Rook Pawn g8)
+			(Water Queen Pawn g6)
+			(Bishop h7)
+			(Knight h5)
+			(Rook h8)
+			(Queen h6)
+;			(King h8)
+		)
+	) ; close of board-setup
+	(variant
+		(title "Earth of Fire (Widdershins)")
+		(turn order earth-wid)
+	) ; close of widdershins
+) ; close of variant
+
+(variant
+	(title "Water of Earth (Deosil)")
+	(define Board-Definitions
+		(image "images\EnochianChess\Earth.bmp")
+	) ; Closing bracket for board definition
+	(turn-order water-deo)
+	(board-setup
+		(Air
+			(Air Bishop Pawn d7)
+			(Air Knight Pawn b7)
+			(Air Rook Pawn c7)
+			(Air Queen Pawn a7)
+			(Knight b8)
+			(Bishop d8)
+			(Rook c8)
+			(Queen a8)
+;			(King a8)
+		)
+		(Earth
+			(Earth Bishop Pawn b4)
+			(Earth Knight Pawn b2)
+			(Earth Rook Pawn b3)
+			(Earth Queen Pawn b1)
+			(Bishop a4)
+			(Knight a2)
+			(Rook a3)
+			(Queen a1)
+;			(King a1)
+		)
+		(Fire
+			(Fire Bishop Pawn e2)
+			(Fire Knight Pawn g2)
+			(Fire Rook Pawn f2)
+			(Fire QUeen Pawn h2)
+			(Bishop e1)
+			(Knight g1)
+			(Rook f1)
+			(Queen h1)
+;			(King h8)
+		)
+		(Water
+			(Water Bishop Pawn g5)
+			(Water Knight Pawn g7)
+			(Water Rook Pawn g6)
+			(Water Queen Pawn g8)
+			(Bishop h5)
+			(Knight h7)
+			(Rook h6)
+			(Queen h8)
+;			(King h8)
+		)
+	) ; close of board-setup
+	(variant
+		(title "Water of Earth (Widdershins)")
+		(turn order water-wid)
+	) ; close of widdershins
+) ; closing bracket for variant
+
+(variant
+	(title "Water of Fire (Deosil)")
+	(define Board-Definitions
+		(image "images\EnochianChess\Fire.bmp")
+	) ; Closing bracket for board definition
+	(turn-order water-deo)
+	(board-setup
+		(Air
+			(Air Bishop Pawn d7)
+			(Air Knight Pawn b7)
+			(Air Rook Pawn c7)
+			(Air Queen Pawn a7)
+			(Knight b8)
+			(Bishop d8)
+			(Rook c8)
+			(Queen a8)
+;			(King a8)
+		)
+		(Earth
+			(Earth Bishop Pawn b4)
+			(Earth Knight Pawn b2)
+			(Earth Rook Pawn b3)
+			(Earth Queen Pawn b1)
+			(Bishop a4)
+			(Knight a2)
+			(Rook a3)
+			(Queen a1)
+;			(King a1)
+		)
+		(Fire
+			(Fire Bishop Pawn e2)
+			(Fire Knight Pawn g2)
+			(Fire Rook Pawn f2)
+			(Fire QUeen Pawn h2)
+			(Bishop e1)
+			(Knight g1)
+			(Rook f1)
+			(Queen h1)
+;			(King h8)
+		)
+		(Water
+			(Water Bishop Pawn g5)
+			(Water Knight Pawn g7)
+			(Water Rook Pawn g6)
+			(Water Queen Pawn g8)
+			(Bishop h5)
+			(Knight h7)
+			(Rook h6)
+			(Queen h8)
+;			(King h8)
+		)
+	) ; close of board-setup
+	(variant
+		(title "Water of Fire (Widdershins)")
+		(turn order water-wid)
+	) ; close of widdershins
+) ; closing bracket for variant
 
 ) ; Closing bracket for game
