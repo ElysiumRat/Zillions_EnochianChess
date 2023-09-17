@@ -13,14 +13,14 @@
 	(define move-br ($1 (while empty? add $1) (verify not-friend?) add))
 
 	; Turn order macros
-	(define air-deo ())
-	(define air-wid ())
-	(define earth-deo ())
-	(define earth-wid ())
-	(define fire-deo ())
-	(define fire-wid ())
-	(define water-deo ())
-	(define water-wid ())
+	(define air-deo (Air Water Fire Earth))
+	(define air-wid (Air Earth Fire Water))
+	(define earth-deo (Earth Air Water Fire))
+	(define earth-wid (Earth Fire Water Air))
+	(define fire-deo (Fire Earth Air Water))
+	(define fire-wid (Fire Water Air Earth))
+	(define water-deo (Water Fire Earth Air))
+	(define water-wid (Water Air Earth Fire))
 
 (define Board-Definitions
 	(image "images\EnochianChess\Simple.bmp")
@@ -151,7 +151,7 @@
 
 (define bishop-pawn
 	(piece
-		(name $1 Bishop Pawn)
+		(name $1-Bishop-Pawn)
 		(help "Bishop pawn: moves one square forward, promotes to bishop when reaching the last rank, if at least one of the player's pawns has been taken.")
 		(image	Air "images\Enochian\APawnBishop.bmp"
 			Earth "images\Enochian\EPawnBishop.bmp"
@@ -164,7 +164,7 @@
 
 (define knight-pawn
 	(piece
-		(name $1 Knight Pawn)
+		(name $1-Knight-Pawn)
 		(help "Knight pawn: moves one square forward, promotes to knight when reaching the last rank, if at least one of the player's pawns has been taken.")
 		(image	Air "images\Enochian\APawnKnight.bmp"
 			Earth "images\Enochian\EPawnKnight.bmp"
@@ -177,7 +177,7 @@
 
 (define rook-pawn
 	(piece
-		(name $1 Rook Pawn)
+		(name $1-Rook-Pawn)
 		(help "Rook pawn: moves one square forward, promotes to rook when reaching the last rank, if at least one of the player's pawns has been taken.")
 		(image	Air "images\Enochian\APawnRook.bmp"
 			Earth "images\Enochian\EPawnRook.bmp"
@@ -190,7 +190,7 @@
 
 (define queen-pawn
 	(piece
-		(name $1 Queen Pawn)
+		(name $1-Queen-Pawn)
 		(help "Queen pawn: moves one square forward, promotes to queen when reaching the last rank, if at least one of the player's pawns has been taken.")
 		(image	Air "images\Enochian\APawnQueen.bmp"
 			Earth "images\Enochian\EPawnQueen.bmp"
@@ -227,7 +227,7 @@
 	(define Board-Definitions
 		(image "images\EnochianChess\Earth.bmp")
 	) ; Closing bracket for board definition
-	(turn-order air-deo)
+	(turn-order (air-deo))
 	(board-setup
 		(Air
 			(Air Bishop Pawn a7)
@@ -276,7 +276,7 @@
 	) ; close of board-setup
 	(variant
 		(title "Air of Earth (Widdershins)")
-		(turn order air-wid)
+		(turn order (air-wid))
 	) ; close of widdershins
 ) ; closing bracket for Air of Earth
 
@@ -285,7 +285,7 @@
 	(define Board-Definitions
 		(image "images\EnochianChess\Fire.bmp")
 	) ; Closing bracket for board definition
-	(turn-order air-deo)
+	(turn-order (air-deo))
 	(board-setup
 		(Air
 			(Air Bishop Pawn a7)
@@ -334,7 +334,7 @@
 	) ; close of board-setup
 	(variant
 		(title "Air of Fire (Widdershins)")
-		(turn-order air-deo)
+		(turn-order (air-wid))
 	) ; close of widdershins
 ) ; closing bracket for variant
 
@@ -343,7 +343,7 @@
 	(define Board-Definitions
 		(image "images\EnochianChess\Earth.bmp")
 	) ; Closing bracket for board definition
-	(turn-order earth-deo)
+	(turn-order (earth-deo))
 	(board-setup
 		(Air
 			(Air Bishop Pawn b7)
@@ -392,7 +392,7 @@
 	) ; close of board-setup
 	(variant
 		(title "Earth of Earth (Widdershins)")
-		(turn order earth-wid)
+		(turn order (earth-wid))
 	) ; close of widdershins
 ) ; close of variant
 
@@ -401,7 +401,7 @@
 	(define Board-Definitions
 		(image "images\EnochianChess\Fire.bmp")
 	) ; Closing bracket for board definition
-	(turn-order earth-deo)
+	(turn-order (earth-deo))
 	(board-setup
 		(Air
 			(Air Bishop Pawn b7)
@@ -450,7 +450,7 @@
 	) ; close of board-setup
 	(variant
 		(title "Earth of Fire (Widdershins)")
-		(turn order earth-wid)
+		(turn order (earth-wid))
 	) ; close of widdershins
 ) ; close of variant
 
@@ -459,7 +459,7 @@
 	(define Board-Definitions
 		(image "images\EnochianChess\Earth.bmp")
 	) ; Closing bracket for board definition
-	(turn-order water-deo)
+	(turn-order (water-deo))
 	(board-setup
 		(Air
 			(Air Bishop Pawn d7)
@@ -508,7 +508,7 @@
 	) ; close of board-setup
 	(variant
 		(title "Water of Earth (Widdershins)")
-		(turn order water-wid)
+		(turn order (water-wid))
 	) ; close of widdershins
 ) ; closing bracket for variant
 
@@ -517,7 +517,7 @@
 	(define Board-Definitions
 		(image "images\EnochianChess\Fire.bmp")
 	) ; Closing bracket for board definition
-	(turn-order water-deo)
+	(turn-order (water-deo))
 	(board-setup
 		(Air
 			(Air Bishop Pawn d7)
@@ -566,8 +566,7 @@
 	) ; close of board-setup
 	(variant
 		(title "Water of Fire (Widdershins)")
-		(turn order water-wid)
+		(turn order (water-wid))
 	) ; close of widdershins
 ) ; closing bracket for variant
-
-) ; Closing bracket for game
+)
