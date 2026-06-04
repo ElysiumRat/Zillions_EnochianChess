@@ -1,0 +1,2 @@
+*.zrf linguist-language=Lisp
+*.zrf linguist-detectable=true
