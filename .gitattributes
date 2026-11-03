@@ -1,2 +1,7 @@
 *.zrf linguist-language=Lisp
 *.zrf linguist-detectable=true
+
+* text=auto
+*.zrf text eol=lf
+
+*.bmp binary
